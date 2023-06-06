@@ -1,0 +1,27 @@
+header {
+    margin-right: 20%;
+    margin-left: 20%;
+    font-size: 20px;
+}
+
+header a, .main-news{
+    display: block;
+    transition: .3s;
+    color: purple;
+}
+
+header a:hover {
+    transform: scale(1.1);
+    color: darkviolet;
+}
+
+.main-news {
+    text-align: center;
+}
+
+.news {
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    font-size: 17px;
+}

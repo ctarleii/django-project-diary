@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Главная страница{% endblock title %}
+
+{% block content %}
+    <div class="main-news">
+        <h2>Последние новости из нашей школьной жизни</h2><br>
+        {% for new in content %}
+            <div class="news">
+                {{ new.name }}<br>
+                {{ new.new }} - {{ new.author }}<br><br><hr>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
+
