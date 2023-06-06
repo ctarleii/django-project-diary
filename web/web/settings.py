@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'school.User'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 # Application definition
 
@@ -78,9 +81,9 @@ WSGI_APPLICATION = 'web.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgresql',
+        'NAME': 'postdb',
         'USER': 'postgres',
-        'PASSWORD': 'postgres',
+        'PASSWORD': 'egor236239',
         'HOST': 'localhost',
         'PORT': '5432',
     }
