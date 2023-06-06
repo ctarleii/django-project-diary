@@ -3,17 +3,11 @@
 {% block content %}
     <div class="main-news">
         <h2>Последние новости из нашей школьной жизни</h2><br>
-{#        {% for new in content %}#}
-{#            <div class="news">#}
-{#                <h4>{{ new.name }}</h4><br>#}
-{#                {{ new.new }} - {{ new.author }}<br><br><hr>#}
-{#            </div>#}
-{#        {% endfor %}#}
+        {% for new in content %}
+            <div class="news">
+                <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'main' %}"><h3>{{ new.title }}</h3><br><br>
+                {{ new.content }}<br><hr></a>
+            </div>
+        {% endfor %}
     </div>
-        User: {{ user }}
-    {% if user.is_authenticated %}
-        <a href="{% url 'logout' %}">logout</a>
-    {% else %}
-        <a href="{% url 'login' %}">login</a> | <a href="{% url 'register' %}">Register</a>
-    {% endif %}
 {% endblock content %}
