@@ -18,6 +18,9 @@ from django.contrib import admin
 from django.urls import path, include
 
 from school import views
+from school.urls import my_patterns
+from school.views import NewsDetailView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,6 +28,6 @@ urlpatterns = [
     path('diary/', views.diary, name='diary'),
     path('news/', views.news, name='news'),
     path('users/', include('school.urls')),
-    path('cabinet/', include('school.urls')),
-    path('news/', include('school.urls')),
+    # path('cabinet/', views.cabinet, name='cabinet'),
+    path('', include(my_patterns)),
 ]

@@ -12,6 +12,7 @@
 
 </head>
 <body>
+<div class="content">
     {% block header %}
         {% if request.user.is_authenticated %}
         <header>
@@ -30,7 +31,7 @@
             </div>
         </header>
         {% else %}
-                    <header>
+        <header>
             <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
               <a href="{% url 'main' %}" class="d-flex align-items-center link-body-emphasis text-decoration-none">
                 <span class="fs-4">Электронный дневник</span>
@@ -50,5 +51,13 @@
     <div>
         {% block content %}{% endblock content %}
     </div>
+</div>
+    <footer class="py-5 my-5">
+        <div class="footer">
+            <hr>
+            <br>
+            <p class="text-center text-body-secondary">© 2023 TheBestCompany, Inc</p>
+        </div>
+    </footer>
 </body>
 </html>

@@ -8,14 +8,14 @@ from school.models import News, User
 
 
 def index(request):
-    content = News.objects.all()
+    content = News.objects.order_by('-date')[:5]
     return render(request, 'news.html', context={
         'content': content
     })
 
 
 def news(request):
-    content = News.objects.order_by('-date')[:5:]
+    content = News.objects.order_by('-date')[:5]
     return render(request, 'news.html', context={
         'content': content
     })
