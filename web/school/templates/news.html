@@ -3,11 +3,18 @@
 {% block content %}
     <div class="main-news">
         <h2>Последние новости из нашей школьной жизни</h2><br>
-        {% for new in content %}
-            <div class="news">
-                <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'main' %}"><h3>{{ new.title }}</h3><br><br>
-                {{ new.content }}<br><hr></a>
+        {% if content %}
+            {% for new in content %}
+                <div class="news">
+                    <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'news-detail' new.id %}"><h3>{{ new.title }}</h3><br><br>
+                    {{ new.content }}<br><hr></a>
+
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="main-news">
+                <h3>Записей нет</h3>
             </div>
-        {% endfor %}
+        {% endif %}
     </div>
 {% endblock content %}

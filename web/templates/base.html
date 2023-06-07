@@ -13,7 +13,24 @@
 </head>
 <body>
     {% block header %}
+        {% if request.user.is_authenticated %}
         <header>
+            <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+              <a href="{% url 'main' %}" class="d-flex align-items-center link-body-emphasis text-decoration-none">
+                <span class="fs-4">Электронный дневник</span>
+              </a>
+
+              <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+                <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'diary' %}">Мой дневник</a>
+                <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'news' %}">Новости</a>
+                <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'cabinet' %}">Личный кабинет</a>
+{#                <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'register' %}">Регистрация</a>#}
+{#                <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'login' %}">Авторизация</a>#}
+              </nav>
+            </div>
+        </header>
+        {% else %}
+                    <header>
             <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
               <a href="{% url 'main' %}" class="d-flex align-items-center link-body-emphasis text-decoration-none">
                 <span class="fs-4">Электронный дневник</span>
@@ -27,6 +44,8 @@
               </nav>
             </div>
         </header>
+        {% endif %}
+
     {% endblock header %}
     <div>
         {% block content %}{% endblock content %}

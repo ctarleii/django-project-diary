@@ -3,12 +3,14 @@
 {% block content %}
     <h1>Register</h1>
     <hr>
-    <div class="register">
+    <div class="registration">
         <form action="{% url 'register' %}" method="POST">
             <p class="input-field">Введите ваш логин: {{ form.username }}</p>
             <p class="input-field">Введите вашу почту: {{ form.email }}</p>
             <p class="input-field">Введите ваш пароль: {{ form.password1 }}</p>
             <p class="input-field">Ещё раз: {{ form.password2 }}</p>
+            <p class="input-field">Введите ваше имя: {{ form.first_name }}</p>
+            <p class="input-field">Фамилию: {{ form.last_name }}</p>
             {% csrf_token %}
             <button type="submit" class="btn btn-success">Зарегистрироваться!</button>
         </form>

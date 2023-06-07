@@ -4,7 +4,7 @@ header {
     font-size: 20px;
 }
 
-header a, .main-news, .news a, .news{
+header a, .main-news, .news a, .news, .registration{
     display: block;
     transition: .3s;
     color: purple;
@@ -17,16 +17,20 @@ header a:hover, .news:hover{
 
 .main-news {
     text-align: center;
+    margin-left: 25%;
+    margin-right: 25%;
 }
 
-.news {
+.news, .registration {
     margin-left: auto;
     margin-right: auto;
     width: 40%;
     font-size: 18px;
 }
 
-.register {
-    text-align: center;
+.registration {
+    margin-left: 30%;
+    font-size: 18px;
 }
+
 

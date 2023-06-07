@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Личный кабинет{% endblock title %}
+{% block content %}
+    <div class="registration">
+        Ваш логин: {{ user.username }}<br>
+        Ваш email: {{ user.email }}<br>
+        Ваше имя: {{ user.first_name }} {{ user.last_name }}<br>
+        {% if user.is_staff  %}
+            <p>У вас расширенные права</p>
+        {% else %}
+            <p>У вас стандартные права</p>
+        {% endif %}
+    <form action="{% url 'logout' %}" method="get">
+        {% csrf_token %}
+        <button class="btn btn-success" >Выйти из аккаунта</button>
+    </form>
+    </div>
+{% endblock content %}

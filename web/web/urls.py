@@ -24,5 +24,7 @@ urlpatterns = [
     path('', views.index, name='main'),
     path('diary/', views.diary, name='diary'),
     path('news/', views.news, name='news'),
-    path('users/', include('school.urls'))
+    path('users/', include('school.urls')),
+    path('cabinet/', include('school.urls')),
+    path('news/', include('school.urls')),
 ]

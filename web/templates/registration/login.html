@@ -7,12 +7,14 @@
     {% if form.errors %}
         <p>{{ form.errors.error }}</p>
     {% endif %}
+    <div class="registration">
+        <form action="{% url 'login' %}" method="POST">
+            <p class="input-field">Введите ваш логин: {{ form.username }}</p>
+            <p class="input-field">Введите ваш пароль: {{ form.password }}</p>
+            <a href="{% url 'password_reset' %}">Forget password?</a><br><br>
 
-    <form action="{% url 'login' %}" method="post">
-        {{ form }}
-        {% csrf_token %}
-        <button type="submit" class="btn btn-success">submit</button>
-    </form>
-
-    <a href="{% url 'password_reset' %}">Forget password?</a>
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success">Войти!</button>
+        </form>
+    </div>
 {% endblock content %}
