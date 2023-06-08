@@ -25,3 +25,9 @@ class News(models.Model):
 class Likes(models.Model):
     ip = models.CharField('IP-адрес', max_length=100)
     pos = models.ForeignKey(News, verbose_name='Публикация', on_delete=models.CASCADE)
+
+
+class Comments(models.Model):
+    article = models.ForeignKey(News, on_delete=models.CASCADE, verbose_name='Статья', related_name='comments_news', null=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, max_length=255, verbose_name='Автор комментария', null=True)
+    text = models.TextField(verbose_name='Текст комментария', null=True)

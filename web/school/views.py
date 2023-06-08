@@ -1,30 +1,64 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import DetailView
+from django.views.generic.edit import FormMixin
 
-from school.forms import UserCreationForm
+from school.forms import UserCreationForm, CommentForm
 from school.models import News, User, Likes
 
 
 def index(request):
+    # content = News.objects.order_by('-date')[:5]
     content = News.objects.order_by('-date')[:5]
-    return render(request, 'news.html', context={
+    return render(request, 'index.html', context={
+        # 'content': content,
         'content': content
     })
 
 
 def news(request):
-    content = News.objects.order_by('-date')[:5]
+    content = News.objects.order_by('-date')[:15]
     return render(request, 'news.html', context={
         'content': content
     })
 
 
-class NewsDetailView(DetailView):
+class CustomSuccessMessageMixin:
+    @property
+    def success_msg(self):
+        return False
+
+    def form_valid(self, form):
+        messages.success(self.request, self.success_msg)
+        return super().form_valid(form)
+
+
+class NewsDetailView(CustomSuccessMessageMixin, FormMixin, DetailView):
     model = News
     template_name = 'news_detail.html'
     context_object_name = 'article'
+    form_class = CommentForm
+    success_msg = 'Комментарий успешно создан'
+
+    def get_success_url(self, **kwargs):
+        return reverse_lazy('news-detail', kwargs={'pk': self.get_object().id})
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.article = self.get_object()
+        self.object.author = self.request.user
+        self.object.save()
+        return super().form_valid(form)
 
 
 def diary(request):

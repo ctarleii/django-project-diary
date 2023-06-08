@@ -1,16 +1,112 @@
 {% extends 'base.html' %}
 {% block title %}Новости{% endblock title %}
 {% block content %}
-    <div class="main-news">
-        <h1>{{ article.title }}</h1>
-        <p>{{ article.date.date }}</p>
-        <p>{{ article.content }}</p>
+{#    <div class="main-news">#}
+{#        <h1>{{ article.title }}</h1>#}
+{#        <p>{{ article.date.date }}</p>#}
+{#        <p>{{ article.content }}</p>#}
+{#        <hr>#}
+        {# лайки #}
+{#        {% if not request.user.is_authenticated %}#}
+{#            <br>#}
+{#            <h5>Чтобы поставить Лайк или написать Комментарий необходимо <a#}
+{#                class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'login' %}">авторизоваться!</a></h5>#}
+{##}
+{#        {% endif %}#}
+{#        {% if request.user.is_authenticated %}#}
+{##}
+{#        <p>Понравилось: {{ article.likes_set.all.count }}</p>#}
+{#        <a href="{% url 'add_likes' article.id %}" class="btn btn-danger">Понравилось</a>#}
+{#        <a href="{% url 'del_likes' article.id %}" class="btn btn-danger">Не понравилось</a>#}
+{##}
+{##}
+        {# комментарии #}
+{#        <p>Комментарии ({{ article.comments_news.all.count }}) </p>#}
+{#        <p>Добавить комментарий</p>#}
+{##}
+{#        {% if messages %}#}
+{#            <div class="alert alert-success">#}
+{#                Комментарий успешно создан!#}
+{#            </div>#}
+{##}
+{#        {% endif %}#}
+{##}
+{#        <div class="col-4" >#}
+{#            <form action="" method="post" id="add_form">#}
+{#                {% csrf_token %}#}
+{#                {{ form.as_p }}#}
+{#            </form>#}
+{#            <button form="add_form" type="submit" class="btn btn-primary">Добавить</button>#}
+{#            <br><br>#}
+{#        </div>#}
+{##}
+{#    <div class="comments">#}
+{#        <ul>#}
+{#            {% for item in article.comments_news.all %}#}
+{#                <li>#}
+{#                   Автор: {{ item.author }}<br><br>#}
+{#                    Комментарий: {{ item.text }}<br>#}
+{#                </li>#}
+{#                <hr>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+{#    </div>#}
+{#    </div>#}
+{#            {% endif %}#}
+
+
+
+<div class="px-4 py-5 my-4 text-center">
+    <h1 class="display-5 fw-bold text-body-emphasis">{{ article.title}}</h1>
+    <p class="display-6  text-body-emphasis">{{ article.date.date}}</p>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">{{ article.content }}</p>
+                  {% if not request.user.is_authenticated %}
+      <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4 underline"><u>Чтобы лайкнуть или прокомментировать запись необходимо <a
+                href="{% url 'login' %}">авторизоваться!</a></u></p>
+            <a href="{% url 'login' %}" class="btn btn-outline-primary btn-lg px-4" style="width: 30%">Лайк</a>
+            <a href="{% url 'login' %}" type="button" class="btn btn-outline-danger btn-lg px-4" style="width: 30%">Дизлайк</a>
+      </div>
+                  {% else %}
+      <p class="lead mb-4">Понравилось: {{ article.likes_set.all.count }}</p>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <a type="{% url 'add_likes' article.id %}" class="btn btn-outline-primary btn-lg px-4" style="width: 15%">Лайк</a>
+            <a href="{% url 'del_likes' article.id %}" type="button" class="btn btn-outline-danger btn-lg px-4" style="width: 15%">Дизлайк</a>
+      </div>
+            <br>
+            <p class="lead mb-4">Комментарии ({{ article.comments_news.all.count }}) </p>
+            <p class="lead mb-4">Добавить комментарий</p>
+
+      {% if messages %}
+            <div class="alert alert-success">
+            Комментарий успешно создан!
+            </div>
+      {% endif %}
+
+                 <div class="col-4" >
+            <form action="" method="post" id="add_form">
+                {% csrf_token %}
+                {{ form.as_p }}
+            </form>
+            <button form="add_form" type="submit" class="btn btn-outline-primary btn-lg px-4">Добавить</button>
+            <br><br>
+        </div>
+
+    <div class="comments">
+        <ul>
+            {% for item in article.comments_news.all %}
+                <li>
+                    <p class="lead mb-4">Автор: {{ item.author }}</p>
+                    <p class="lead mb-4">Комментарий: {{ item.text }}</p>
+                </li>
+                <hr>
+            {% endfor %}
+        </ul>
     </div>
-    <div>
-        {% csrf_token %}
-        <p>Понравилось: {{ article.likes_set.all.count }}</p>
-        <br>
-        <a href="{% url 'add_likes' article.id %}">Понравилось</a>
-        <a href="{% url 'del_likes' article.id %}">Не понравилось</a>
     </div>
+            {% endif %}
+    </div>
+  </div>
+
 {% endblock content %}

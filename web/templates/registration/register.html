@@ -1,18 +1,80 @@
 {% extends "base.html" %}
 {% block title %}Регистрация{% endblock title %}
 {% block content %}
-    <h1>Register</h1>
-    <hr>
-    <div class="registration">
-        <form action="{% url 'register' %}" method="POST">
-            <p class="input-field">Введите ваш логин: {{ form.username }}</p>
-            <p class="input-field">Введите вашу почту: {{ form.email }}</p>
-            <p class="input-field">Введите ваш пароль: {{ form.password1 }}</p>
-            <p class="input-field">Ещё раз: {{ form.password2 }}</p>
-            <p class="input-field">Введите ваше имя: {{ form.first_name }}</p>
-            <p class="input-field">Фамилию: {{ form.last_name }}</p>
+{#    <h1>Register</h1>#}
+{#    <hr>#}
+{#    <div class="registration">#}
+{#        <form action="{% url 'register' %}" method="POST">#}
+{#            <p class="input-field">Введите ваш логин: {{ form.username }}</p>#}
+{#            <p class="input-field">Введите вашу почту: {{ form.email }}</p>#}
+{#            <p class="input-field">Введите ваш пароль: {{ form.password1 }}</p>#}
+{#            <p class="input-field">Ещё раз: {{ form.password2 }}</p>#}
+{#            <p class="input-field">Введите ваше имя: {{ form.first_name }}</p>#}
+{#            <p class="input-field">Фамилию: {{ form.last_name }}</p>#}
+{#            {% csrf_token %}#}
+{#            <button type="submit" class="btn btn-success">Зарегистрироваться!</button>#}
+{#        </form>#}
+{#    </div>#}
+    <div class="modal modal-sheet position-static d-block bg-body-secondary p-4 py-md-5" tabindex="-1" role="dialog" id="modalSignin">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content rounded-4 shadow">
+      <div class="modal-header p-5 pb-4 border-bottom-0">
+        <h1 class="fw-bold mb-0 fs-2">Регистрация</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body p-5 pt-0">
+        <form class="" action="{% url 'register' %}" method="POST">
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control rounded-3" id="floatingLogin" placeholder="username" data-model-name={{ form.username }}
+            <label for="floatingLogin">Логин</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control rounded-3" id="floatingEmail" placeholder="email@example.com" data-model-name={{ form.email }}
+            <label for="floatingEmail">Email</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control rounded-3" id="floatingPass1" placeholder="Пароль" data-model-name={{ form.password1 }}
+            <label for="floatingPass1">Пароль</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control rounded-3" id="floatingPass2" placeholder="Повтор Пароля" data-model-name={{ form.password2 }}
+            <label for="floatingPass2">Пароль</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control rounded-3" id="floatingFName" placeholder="First_name" data-model-name={{ form.first_name }}
+            <label for="floatingFName">Имя</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control rounded-3" id="floatingLName" placeholder="Last_name" data-model-name={{ form.last_name }}
+            <label for="floatingLName">Фамилия</label>
+          </div>
             {% csrf_token %}
-            <button type="submit" class="btn btn-success">Зарегистрироваться!</button>
+          <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Зарегистрироваться</button>
+{#          <small class="text-body-secondary">By clicking Sign up, you agree to the terms of use.</small>#}
+{#          <hr class="my-4">#}
+{#          <h2 class="fs-5 fw-bold mb-3">Or use a third-party</h2>#}
+{#          <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" type="submit">#}
+{#            <svg class="bi me-1" width="16" height="16"><use xlink:href="#twitter"></use></svg>#}
+{#            Sign up with Twitter#}
+{#          </button>#}
+{#          <button class="w-100 py-2 mb-2 btn btn-outline-primary rounded-3" type="submit">#}
+{#            <svg class="bi me-1" width="16" height="16"><use xlink:href="#facebook"></use></svg>#}
+{#            Sign up with Facebook#}
+{#          </button>#}
+{#          <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" type="submit">#}
+{#            <svg class="bi me-1" width="16" height="16"><use xlink:href="#github"></use></svg>#}
+{#            Sign up with GitHub#}
+{#          </button>#}
         </form>
+      </div>
     </div>
+  </div>
+</div>
 {% endblock content %}
