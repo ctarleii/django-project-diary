@@ -6,4 +6,11 @@
         <p>{{ article.date.date }}</p>
         <p>{{ article.content }}</p>
     </div>
+    <div>
+        {% csrf_token %}
+        <p>Понравилось: {{ article.likes_set.all.count }}</p>
+        <br>
+        <a href="{% url 'add_likes' article.id %}">Понравилось</a>
+        <a href="{% url 'del_likes' article.id %}">Не понравилось</a>
+    </div>
 {% endblock content %}

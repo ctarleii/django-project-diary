@@ -20,3 +20,8 @@ class News(models.Model):
 
         verbose_name = 'New'
         verbose_name_plural = 'News'
+
+
+class Likes(models.Model):
+    ip = models.CharField('IP-адрес', max_length=100)
+    pos = models.ForeignKey(News, verbose_name='Публикация', on_delete=models.CASCADE)

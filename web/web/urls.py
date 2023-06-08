@@ -19,8 +19,7 @@ from django.urls import path, include
 
 from school import views
 from school.urls import my_patterns
-from school.views import NewsDetailView
-
+from school.views import NewsDetailView, DelLike, AddLike
 
 urlpatterns = [
     path('admin/', admin.site.urls),
