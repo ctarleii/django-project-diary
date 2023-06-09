@@ -7,7 +7,7 @@ from django.views.generic import DetailView
 from django.views.generic.edit import FormMixin
 
 from school.forms import UserCreationForm, CommentForm
-from school.models import News, User, Likes
+from school.models import News, User, Likes, Permissions
 
 
 def index(request):
@@ -66,9 +66,12 @@ def diary(request):
 
 
 def cabinet(request):
+    # content = Permissions.objects.all()
     content = User.objects.all()
+    content2 = Permissions.objects.all()
     context = {
-        'content': content
+        'content': content,
+        'content2': content2
     }
     return render(request, 'cabinet.html', context)
 
@@ -128,8 +131,8 @@ class DelLike(View):
     def get(self, request, pk):
         ip_client = get_client_ip(request)
         try:
-            lik = Likes.objects.get(ip=ip_client)
-            lik.delete()
+            like = Likes.objects.get(ip=ip_client)
+            like.delete()
             return redirect(to=f'/news/{pk}')
         except:
             return redirect(to=f'/news/{pk}')

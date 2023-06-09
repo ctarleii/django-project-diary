@@ -2,9 +2,22 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
+class Permissions(models.Model):
+    status = models.CharField(max_length=255, default='nothing', null=True)
+    description = models.CharField(max_length=255, default='nothing', null=False)
+    # username = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+
+
 class User(AbstractUser):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
+    # is_staff = models.ForeignKey(Permissions, on_delete=models.SET_NULL, null=True)
+
+
+# class Permission(models.Model):
+#     status = models.CharField(max_length=255, default='nothing', null=True)
+#     description = models.CharField(max_length=255, default='nothing', null=False)
+#     username = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
 
 class News(models.Model):
@@ -20,6 +33,33 @@ class News(models.Model):
 
         verbose_name = 'New'
         verbose_name_plural = 'News'
+
+
+class Lessons(models.Model):
+    lesson = models.CharField(max_length=255, null=False)
+    teacher = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.lesson} - {self.teacher}'
+
+
+class Student(models.Model):
+    username = models.ForeignKey(User, on_delete=models.CASCADE)
+    rate = models.IntegerField(null=True)
+    lesson = models.ForeignKey(Lessons, on_delete=models.CASCADE)
+
+    # lst = []
+    # lst.extend(str(n))
+    # sum = sum(map(int, lst))
+    # res = sum / len(lst)
+
+    def __str__(self):
+        return f'{self.username} - {self.lesson} - {sum(map(int, list(str(self.rate).split(",")[0]))) / len(list(str(self.rate).split(",")[0]))}'
+
+    class Meta:
+
+        verbose_name = 'Student'
+        verbose_name_plural = 'Students'
 
 
 class Likes(models.Model):

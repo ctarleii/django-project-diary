@@ -65,22 +65,22 @@
       <div class="col-lg-6 mx-auto">
             <p class="lead mb-4 underline"><u>Чтобы лайкнуть или прокомментировать запись необходимо <a
                 href="{% url 'login' %}">авторизоваться!</a></u></p>
-            <a href="{% url 'login' %}" class="btn btn-outline-primary btn-lg px-4" style="width: 30%">Лайк</a>
-            <a href="{% url 'login' %}" type="button" class="btn btn-outline-danger btn-lg px-4" style="width: 30%">Дизлайк</a>
+            <a href="#" class="btn btn-outline-primary btn-lg px-4" style="width: 30%">Лайк</a>
+            <a href="#" type="button" class="btn btn-outline-danger btn-lg px-4" style="width: 30%">Дизлайк</a>
       </div>
                   {% else %}
       <p class="lead mb-4">Понравилось: {{ article.likes_set.all.count }}</p>
       <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <a type="{% url 'add_likes' article.id %}" class="btn btn-outline-primary btn-lg px-4" style="width: 15%">Лайк</a>
-            <a href="{% url 'del_likes' article.id %}" type="button" class="btn btn-outline-danger btn-lg px-4" style="width: 15%">Дизлайк</a>
+            <a href="{% url 'add_likes' article.id %}"  class="btn btn-outline-primary btn-lg px-4" style="width: 15%">Лайк</a>
+            <a href="{% url 'del_likes' article.id %}"  class="btn btn-outline-danger btn-lg px-4" style="width: 15%">Дизлайк</a>
       </div>
             <br>
             <p class="lead mb-4">Комментарии ({{ article.comments_news.all.count }}) </p>
             <p class="lead mb-4">Добавить комментарий</p>
 
       {% if messages %}
-            <div class="alert alert-success">
-            Комментарий успешно создан!
+            <div class="alert alert-success" style="width: 873px; height: 50px">
+                Комментарий успешно создан!
             </div>
       {% endif %}
 
@@ -89,7 +89,7 @@
                 {% csrf_token %}
                 {{ form.as_p }}
             </form>
-            <button form="add_form" type="submit" class="btn btn-outline-primary btn-lg px-4">Добавить</button>
+            <button form="add_form" type="submit" class="btn btn-outline-primary btn-lg px-4" style="width: 873px; height: 50px" >Отправить</button>
             <br><br>
         </div>
 
@@ -108,5 +108,4 @@
             {% endif %}
     </div>
   </div>
-
 {% endblock content %}
