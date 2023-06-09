@@ -2,13 +2,13 @@
 {% block title %}Новости{% endblock title %}
 {% block content %}
     <div class="main-news">
-        <h2>Последние новости из нашей школьной жизни</h2><br>
+        <h2 class="display-7 text-body-emphasis" style="color:black">Последние новости из нашей школьной жизни</h2><br>
         {% if content %}
             {% for new in content %}
                 <div class="news">
-                    <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'news-detail' new.id %}"><h3>{{ new.title }}</h3><br><br>
-                    {{ new.content }}<br><hr></a>
-
+                    <a class="text-decoration-none" href="{% url 'news-detail' new.id %}" style="color:black"><h1 class="display-7 fw-bold text-body-emphasis">{{ new.title }}</h1></a>
+                    <a class="lead mb-4 text-decoration-none" style="color:black" href="{% url 'news-detail' new.id %}"><p>{{ new.content }}</p></a>
+                    <hr>
                 </div>
             {% endfor %}
         {% else %}

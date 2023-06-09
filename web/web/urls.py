@@ -19,12 +19,14 @@ from django.urls import path, include
 
 from school import views
 from school.urls import my_patterns
-from school.views import NewsDetailView, DelLike, AddLike
+from school.views import Diary
+
+# from school.views import NewsDetailView, DelLike, AddLike
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='main'),
-    path('diary/', views.diary, name='diary'),
+    path('diary/', Diary.as_view(), name='diary'),
     path('news/', views.news, name='news'),
     path('users/', include('school.urls')),
     # path('cabinet/', views.cabinet, name='cabinet'),

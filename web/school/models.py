@@ -1,11 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-
-
-class Permissions(models.Model):
-    status = models.CharField(max_length=255, default='nothing', null=True)
-    description = models.CharField(max_length=255, default='nothing', null=False)
-    # username = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+import statistics
 
 
 class User(AbstractUser):
@@ -30,9 +25,13 @@ class News(models.Model):
         return f'Название: {self.title} Автор: {self.author_name}'
 
     class Meta:
-
         verbose_name = 'New'
         verbose_name_plural = 'News'
+
+
+class Likes(models.Model):
+    ip = models.CharField('IP-адрес', max_length=100)
+    pos = models.ForeignKey(News, verbose_name='Публикация', on_delete=models.CASCADE)
 
 
 class Lessons(models.Model):
@@ -45,7 +44,7 @@ class Lessons(models.Model):
 
 class Student(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE)
-    rate = models.IntegerField(null=True)
+    rate = models.CharField(max_length=255, null=True)
     lesson = models.ForeignKey(Lessons, on_delete=models.CASCADE)
 
     # lst = []
@@ -53,21 +52,25 @@ class Student(models.Model):
     # sum = sum(map(int, lst))
     # res = sum / len(lst)
 
+    # new_rate = sum(map(int, list(str(rate).split(",")[0]))) / len(list(str(self.rate).split(",")[0]))
+
     def __str__(self):
-        return f'{self.username} - {self.lesson} - {sum(map(int, list(str(self.rate).split(",")[0]))) / len(list(str(self.rate).split(",")[0]))}'
-
-    class Meta:
-
-        verbose_name = 'Student'
-        verbose_name_plural = 'Students'
+        return f'{self.username} - {self.lesson}    '
 
 
-class Likes(models.Model):
-    ip = models.CharField('IP-адрес', max_length=100)
-    pos = models.ForeignKey(News, verbose_name='Публикация', on_delete=models.CASCADE)
+class Meta:
+    verbose_name = 'Student'
+    verbose_name_plural = 'Students'
 
 
 class Comments(models.Model):
-    article = models.ForeignKey(News, on_delete=models.CASCADE, verbose_name='Статья', related_name='comments_news', null=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, max_length=255, verbose_name='Автор комментария', null=True)
+    article = models.ForeignKey(News, on_delete=models.CASCADE, verbose_name='Статья', related_name='comments_news',
+                                null=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, max_length=255, verbose_name='Автор комментария',
+                               null=True)
     text = models.TextField(verbose_name='Текст комментария', null=True)
+
+
+class Permissions(models.Model):
+    status = models.CharField(max_length=255, default='nothing', null=True)
+    description = models.CharField(max_length=255, default='nothing', null=False)

@@ -16,7 +16,9 @@
 {#        {% endif %}#}
     <form action="{% url 'logout' %}" method="get">
         {% csrf_token %}
-        <button class="btn btn-success" >Выйти из аккаунта</button>
+{#        <button class="btn btn-success" >Выйти из аккаунта</button>#}
+        <button class="btn btn-outline-danger btn-lg px-4"
+                       style="width: 15%">Выйти</button>
     </form>
     </div>
 {% endblock content %}

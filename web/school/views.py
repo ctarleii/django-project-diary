@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from django.db.models import Avg
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
@@ -7,7 +8,41 @@ from django.views.generic import DetailView
 from django.views.generic.edit import FormMixin
 
 from school.forms import UserCreationForm, CommentForm
-from school.models import News, User, Likes, Permissions
+from school.models import News, User, Likes, Permissions, Student
+
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+
+class AddLike(View):
+    def get(self, request, pk):
+        ip_client = get_client_ip(request)
+        try:
+            Likes.objects.get(ip=ip_client, pos_id=pk)
+            return redirect(to=f'/news/{pk}')
+        except:
+            new_like = Likes()
+            new_like.ip = ip_client
+            new_like.pos_id = int(pk)
+            new_like.save()
+            return redirect(to=f'/news/{pk}')
+
+
+class DelLike(View):
+    def get(self, request, pk):
+        ip_client = get_client_ip(request)
+        try:
+            lik = Likes.objects.get(ip=ip_client)
+            lik.delete()
+            return redirect(f'/news/{pk}')
+        except:
+            return redirect(f'/news/{pk}')
 
 
 def index(request):
@@ -24,6 +59,39 @@ def news(request):
     return render(request, 'news.html', context={
         'content': content
     })
+
+
+# def diary(request):
+#     content = Student.objects.all()
+#     new_rate = Student.objects.aggregate(Avg('rate'))
+#     context = {
+#         'content': content,
+#         'new_rate': new_rate
+#     }
+#     return render(request, 'diary.html', context)
+
+
+class Diary(View):
+
+    model = Student
+    template_name = 'diary.html'
+    context_object_name = 'st'
+
+    def get(self, request):
+        new_rate = Student.objects.aggregate(Avg('rate'))
+        context = {
+            'content': Student(),
+            'new_rate': new_rate
+        }
+        return render(request, self.template_name, context)
+
+    # content = Student.objects.all()
+    # new_rate = Student.objects.aggregate(Avg('rate'))
+    # context = {
+    #     'content': content,
+    #     'new_rate': new_rate
+    # }
+    # return render(request, 'diary.html', context)
 
 
 class CustomSuccessMessageMixin:
@@ -61,10 +129,6 @@ class NewsDetailView(CustomSuccessMessageMixin, FormMixin, DetailView):
         return super().form_valid(form)
 
 
-def diary(request):
-    return render(request, 'diary.html')
-
-
 def cabinet(request):
     # content = Permissions.objects.all()
     content = User.objects.all()
@@ -77,7 +141,6 @@ def cabinet(request):
 
 
 class Register(View):
-
     template_name = 'registration/register.html'
 
     def get(self, request):
@@ -102,37 +165,3 @@ class Register(View):
             'form': form
         }
         return render(request, self.template_name, context)
-
-
-def get_client_ip(request):
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded_for:
-        ip = x_forwarded_for.split(',')[0]
-    else:
-        ip = request.META.get('REMOTE_ADDR')
-    return ip
-
-
-class AddLike(View):
-    def get(self, request, pk):
-        ip_client = get_client_ip(request)
-        try:
-            Likes.objects.get(ip=ip_client, pos_id=pk)
-            return redirect(to=f'/news/{pk}')
-        except:
-            new_like = Likes()
-            new_like.ip = ip_client
-            new_like.pos_id = int(pk)
-            new_like.save()
-            return redirect(to=f'/news/{pk}')
-
-
-class DelLike(View):
-    def get(self, request, pk):
-        ip_client = get_client_ip(request)
-        try:
-            like = Likes.objects.get(ip=ip_client)
-            like.delete()
-            return redirect(to=f'/news/{pk}')
-        except:
-            return redirect(to=f'/news/{pk}')
