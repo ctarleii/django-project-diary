@@ -1,58 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}Новости{% endblock title %}
 {% block content %}
-    {#    <div class="main-news">#}
-    {#        <h1>{{ article.title }}</h1>#}
-    {#        <p>{{ article.date.date }}</p>#}
-    {#        <p>{{ article.content }}</p>#}
-    {#        <hr>#}
-    {# лайки #}
-    {#        {% if not request.user.is_authenticated %}#}
-    {#            <br>#}
-    {#            <h5>Чтобы поставить Лайк или написать Комментарий необходимо <a#}
-    {#                class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'login' %}">авторизоваться!</a></h5>#}
-    {##}
-    {#        {% endif %}#}
-    {#        {% if request.user.is_authenticated %}#}
-    {##}
-    {#        <p>Понравилось: {{ article.likes_set.all.count }}</p>#}
-    {#        <a href="{% url 'add_likes' article.id %}" class="btn btn-danger">Понравилось</a>#}
-    {#        <a href="{% url 'del_likes' article.id %}" class="btn btn-danger">Не понравилось</a>#}
-    {##}
-    {##}
-    {# комментарии #}
-    {#        <p>Комментарии ({{ article.comments_news.all.count }}) </p>#}
-    {#        <p>Добавить комментарий</p>#}
-    {##}
-    {#        {% if messages %}#}
-    {#            <div class="alert alert-success">#}
-    {#                Комментарий успешно создан!#}
-    {#            </div>#}
-    {##}
-    {#        {% endif %}#}
-    {##}
-    {#        <div class="col-4" >#}
-    {#            <form action="" method="post" id="add_form">#}
-    {#                {% csrf_token %}#}
-    {#                {{ form.as_p }}#}
-    {#            </form>#}
-    {#            <button form="add_form" type="submit" class="btn btn-primary">Добавить</button>#}
-    {#            <br><br>#}
-    {#        </div>#}
-    {##}
-    {#    <div class="comments">#}
-    {#        <ul>#}
-    {#            {% for item in article.comments_news.all %}#}
-    {#                <li>#}
-    {#                   Автор: {{ item.author }}<br><br>#}
-    {#                    Комментарий: {{ item.text }}<br>#}
-    {#                </li>#}
-    {#                <hr>#}
-    {#            {% endfor %}#}
-    {#        </ul>#}
-    {#    </div>#}
-    {#    </div>#}
-    {#            {% endif %}#}
 
 
     <div class="px-4 py-5 my-4 text-center">
@@ -114,5 +62,5 @@
                 </div>
             {% endif %}
     </div>
-    </div>
+
 {% endblock content %}

@@ -1,24 +1,20 @@
 {% extends "base.html" %}
 {% block title %}Личный кабинет{% endblock title %}
 {% block content %}
-    <div class="registration">
+
+<div class="px-4 py-5 my-5 text-center">
+    <h1 class="display-5 fw-bold text-body-emphasis">Личный кабинет</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">
+        Ваше имя: {{ user.first_name }} {{ user.last_name }}<br>
         Ваш логин: {{ user.username }}<br>
         Ваш email: {{ user.email }}<br>
-        Ваше имя: {{ user.first_name }} {{ user.last_name }}<br>
-{#        {% for status in content %}#}
-{#            {{ user.status }}#}
-{#        {% endfor %}#}
-{#        {{ user.is_staff }}#}
-{#        {% if user.is_staff  %}#}
-{#            <p>У вас расширенные права</p>#}
-{#        {% else %}#}
-{#            <p>У вас стандартные права</p>#}
-{#        {% endif %}#}
-    <form action="{% url 'logout' %}" method="get">
-        {% csrf_token %}
-{#        <button class="btn btn-success" >Выйти из аккаунта</button>#}
-        <button class="btn btn-outline-danger btn-lg px-4"
-                       style="width: 15%">Выйти</button>
-    </form>
+      </p>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <a href="{% url 'main' %}" type="button" class="btn btn-outline-primary btn-lg px-4 gap-3">На главную</a>
+        <a href="{% url 'news' %}" type="button" class="btn btn-outline-secondary btn-lg px-4">Новости</a>
+      </div>
     </div>
+  </div>
+
 {% endblock content %}

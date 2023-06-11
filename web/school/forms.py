@@ -36,6 +36,17 @@ class UserCreationForm(UserCreationForm):
         strip=False,
         help_text=_("Enter the same password as before, for verification."),
     )
+    new_password1 = forms.CharField(
+        label=_("New password"),
+        widget=forms.PasswordInput(attrs={"autocomplete": "new-password"}),
+        strip=False,
+        help_text=password_validation.password_validators_help_text_html(),
+    )
+    new_password2 = forms.CharField(
+        label=_("New password confirmation"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={"autocomplete": "new-password"}),
+    )
 
     # first_name & last_name
     first_name = forms.CharField(
@@ -68,5 +79,3 @@ class CommentForm(forms.ModelForm):
         for field in self.fields:
             self.fields[field].widget.attrs['class'] = 'form-control'
         self.fields['text'].widget = Textarea(attrs={'rows': 3, 'style': 'border-radius: 8px; width: 873px'})
-
-

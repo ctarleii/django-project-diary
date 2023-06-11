@@ -10,7 +10,6 @@
     <title>{% block title %}Default title{% endblock title %}</title>
     <link rel="stylesheet" href="{% static "css/styles.css" %}">
 
-{#    <script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>#}
 
 </head>
 <body>
@@ -21,22 +20,14 @@
 
             <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
                 <div class="logo">
-{#              <button href="{% url 'main' %}" class="d-flex align-items-center link-body-emphasis text-decoration-none">#}
-{#                <span class="fs-4"><a href="" class="btn btn-outline-primary">Электронный дневник</span>#}
-{#              </button>#}
                 <form action="{% url 'main' %}">
-                    <button class="btn btn-outline-primary" style="width: 200px; height: 40px; margin-top: 8px">Электронный дневник</button>
+                    <button class="btn btn-outline-primary w-100" style="height: 40px; margin-top: 8px">Главная</button>
                 </form>
                 </div>
-{#                <div class="nav">#}
               <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-{#                <a class="me-3 py-2 link-body-emphasis text-decoration-none text-primary" href="{% url 'diary' %}">Мой дневник</a>#}
                 <a class="me-3 py-2 link-body-emphasis text-decoration-none text-primary" href="{% url 'news' %}">Новости</a>
                 <a class="me-3 py-2 link-body-emphasis text-decoration-none text-primary" href="{% url 'cabinet' %}">Личный кабинет</a>
-{#                <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'register' %}">Регистрация</a>#}
-{#                <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'login' %}">Авторизация</a>#}
               </nav>
-{#                    </div>#}
             </div>
         </header>
         {% else %}
@@ -44,22 +35,15 @@
 
             <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
                 <div class="logo">
-{#              <button href="{% url 'main' %}" class="d-flex align-items-center link-body-emphasis text-decoration-none">#}
-{#                <span class="fs-4"><a href="" class="btn btn-outline-primary">Электронный дневник</span>#}
-{#              </button>#}
                 <form action="{% url 'main' %}">
-                    <button class="btn btn-outline-primary" style="width: 200px; height: 40px; margin-top: 8px">Электронный дневник</button>
+                    <button class="btn btn-outline-primary w-100" style="height: 40px; margin-top: 8px">Главная</button>
                 </form>
                 </div>
-{#                <div class="nav">#}
               <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-{#                <a class="me-3 py-2 link-body-emphasis text-decoration-none text-primary" href="{% url 'diary' %}">Мой дневник</a>#}
                 <a class="me-3 py-2 link-body-emphasis text-decoration-none text-primary" href="{% url 'news' %}">Новости</a>
-{#                <a class="me-3 py-2 link-body-emphasis text-decoration-none text-primary" href="{% url 'cabinet' %}">Личный кабинет</a>#}
                 <a class="me-3 py-2 link-body-emphasis text-decoration-none text-primary" href="{% url 'register' %}">Регистрация</a>
                 <a class="me-3 py-2 link-body-emphasis text-decoration-none text-primary" href="{% url 'login' %}">Авторизация</a>
               </nav>
-{#                    </div>#}
             </div>
         </header>
         {% endif %}

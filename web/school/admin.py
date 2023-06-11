@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 
-from school.models import News, Student, Lessons, Permissions
+from .models import News, Student, Lessons
 
 # admin.site.register(Permission)
 admin.site.register(News)
